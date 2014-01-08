@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestMsgWindow", "TestMsgWindow\TestMsgWindow.vcxproj", "{95A79046-2A9F-4D18-A93A-B46A385F0BF8}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MiniNews", "MiniNews\MiniNews.vcxproj", "{6A706224-0D7B-42AC-9869-C15B4D4C5BDF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{95A79046-2A9F-4D18-A93A-B46A385F0BF8}.Debug|Win32.ActiveCfg = Debug|Win32
+		{95A79046-2A9F-4D18-A93A-B46A385F0BF8}.Debug|Win32.Build.0 = Debug|Win32
+		{95A79046-2A9F-4D18-A93A-B46A385F0BF8}.Release|Win32.ActiveCfg = Release|Win32
+		{95A79046-2A9F-4D18-A93A-B46A385F0BF8}.Release|Win32.Build.0 = Release|Win32
+		{6A706224-0D7B-42AC-9869-C15B4D4C5BDF}.Debug|Win32.ActiveCfg = Debug|Win32
+		{6A706224-0D7B-42AC-9869-C15B4D4C5BDF}.Debug|Win32.Build.0 = Debug|Win32
+		{6A706224-0D7B-42AC-9869-C15B4D4C5BDF}.Release|Win32.ActiveCfg = Release|Win32
+		{6A706224-0D7B-42AC-9869-C15B4D4C5BDF}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
