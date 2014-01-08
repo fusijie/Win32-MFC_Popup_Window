@@ -1,7 +1,8 @@
 Win32-MFC_Popup_Window
 ======================
+---
 
-高仿QQ新闻弹窗
+##高仿QQ新闻弹窗
 
 感谢 [泪闯天涯](http://blog.csdn.net/cometnet/article/details/7854345) 的分享!
 
@@ -12,3 +13,16 @@ CSDN address: [http://blog.csdn.net/cometnet/article/details/7854345](http://blo
 2.我将它移植到MFC，继承自CWnd
 
 CSDN address:
+
+
+##开发环境
+
+VS2010 Win32/MFC
+
+
+##代码结构
+
+1.MiniNews为Win32项目。NewsWindow.h和NewsWindow.cpp为win32弹窗类
+
+2.TestMsgWindow为MFC项目。MsgWindow.和MsgWindow.cpp为MFC弹窗类
+
