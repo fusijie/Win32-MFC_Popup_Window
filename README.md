@@ -12,7 +12,7 @@ CSDN address: [http://blog.csdn.net/cometnet/article/details/7854345](http://blo
 
 2.我将它移植到MFC，继承自CWnd
 
-CSDN address:
+CSDN address: [http://blog.csdn.net/jackystudio/article/details/18032495](http://blog.csdn.net/jackystudio/article/details/18032495)
 
 
 ##开发环境
