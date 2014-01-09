@@ -26,12 +26,16 @@ public:
 
 	// 创建窗口
 	BOOL Create(HWND hWndParent,LPCTSTR lpWindowName,int nWidth=250,int nHeight=180);
+
 	// 显示窗口
 	void Show();
+
 	// 设置皮肤(位图资源名称,标题栏文本颜色)
 	BOOL SetSkin(LPCTSTR lpBitmapName,COLORREF CaptionColor=0x000000);
+
 	// 设置新闻标题、内容、链接
-	BOOL SetNews(LPCTSTR lpNewsTitle,LPCTSTR lpNewsContent,LPCTSTR lpNewsURL="");
+	BOOL SetMsg(LPCTSTR lpNewsTitle,LPCTSTR lpNewsContent,LPCTSTR lpNewsURL="");
+
 	// 设置自动关闭,如果为真,点击链接后窗口自动关闭
 	void SetAutoClose(BOOL bAutoClose);
 

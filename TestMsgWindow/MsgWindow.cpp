@@ -96,7 +96,7 @@ BOOL CMsgWindow::Create( HWND hWndParent,LPCTSTR lpWindowName,int nWidth,int nHe
 	return TRUE;
 }
 
-BOOL CMsgWindow::SetNews(LPCTSTR lpNewsTitle,LPCTSTR lpNewsContent,LPCTSTR lpNewsURL/*=""*/)
+BOOL CMsgWindow::SetMsg(LPCTSTR lpNewsTitle,LPCTSTR lpNewsContent,LPCTSTR lpNewsURL/*=""*/)
 {
 	if(!m_nControlCount)return FALSE;
 	m_pControls[2].strText=lpNewsTitle;

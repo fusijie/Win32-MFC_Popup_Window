@@ -26,3 +26,7 @@ VS2010 Win32/MFC
 
 2.TestMsgWindow为MFC项目。MsgWindow.和MsgWindow.cpp为MFC弹窗类
 
+
+##效果图
+<div align="center"><img src="高仿QQ新闻右下角弹窗效果图.jpg" alt="" border="0" title="高仿QQ新闻右下角弹窗效果图" /></div>
+

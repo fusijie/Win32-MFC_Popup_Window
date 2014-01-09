@@ -96,6 +96,11 @@
   <ItemGroup>
     <None Include="ReadMe.txt" />
     <None Include="res\Skin_MsgBox.bmp" />
+    <None Include="res\Skin_QQ_Fireworks.png" />
+    <None Include="res\Skin_WangWang.bmp" />
+    <None Include="res\Skin_WangWang_Fireworks.png" />
+    <None Include="res\Skin_XunLei.bmp" />
+    <None Include="res\Skin_XunLei_Fireworks.png" />
     <None Include="res\TestMsgWindow.ico" />
     <None Include="res\TestMsgWindow.rc2" />
   </ItemGroup>

@@ -25,6 +25,21 @@
     <None Include="res\Skin_MsgBox.bmp">
       <Filter>资源文件</Filter>
     </None>
+    <None Include="res\Skin_QQ_Fireworks.png">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\Skin_WangWang.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\Skin_WangWang_Fireworks.png">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\Skin_XunLei.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\Skin_XunLei_Fireworks.png">
+      <Filter>资源文件</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TestMsgWindow.h">

@@ -158,26 +158,12 @@ HCURSOR CTestMsgWindowDlg::OnQueryDragIcon()
 
 void CTestMsgWindowDlg::OnBnClickedButton1()
 {
-	//CNewsWindow NewsWindow;
-
-	//NewsWindow.SetSkin(MAKEINTRESOURCE(IDB_BITMAP1));
-	//if(!NewsWindow.Create(_T("万华数字中继台"))) return ;
-
-	//NewsWindow.SetNews("123","456","");
-	//NewsWindow.Show();
-	//NewsWindow.SetMainWindow(false);
-
-	//MSG msg;
-	//while (GetMessage(&msg, NULL, 0, 0))
-	//{
-	//	TranslateMessage(&msg);
-	//	DispatchMessage(&msg);
-	//}
-
 	CMsgWindow* p_MsgWindow=new CMsgWindow;
 	p_MsgWindow->SetSkin(MAKEINTRESOURCE(IDB_BITMAP1));
+	//p_MsgWindow->SetSkin(MAKEINTRESOURCE(IDB_BITMAP2));
+	//p_MsgWindow->SetSkin(MAKEINTRESOURCE(IDB_BITMAP3));
 	if(!p_MsgWindow->Create(m_hWnd,"偶尔e网事")) 
 	{AfxMessageBox("Create Failed!");return;}
-	p_MsgWindow->SetNews("我的CSDN博客","blog.csdn.net/jackystudio","http://blog.csdn.net/jackystudio");
+	p_MsgWindow->SetMsg("高仿QQ新闻右下角弹窗","欢迎来到我的CSDN博客：blog.csdn.net/jackystudio\n\n源码码作者为泪闯天涯：blog.csdn.net/cometnet\n\n此为MFC版，欢迎使用！","http://blog.csdn.net/jackystudio");
 	p_MsgWindow->Show();
 }
