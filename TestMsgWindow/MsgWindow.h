@@ -14,7 +14,10 @@
 
 // CMsgWindow
 
-#define WM_CONTROLCLICK WM_APP+106
+#define WM_CONTROLCLICK		WM_APP+106
+#define TIMER_WINDOW_DELAY		10085
+#define TIMER_WINDOW_FADEOUT	10086
+#define DELAY_TIME				2000
 
 class CMsgWindow : public CWnd
 {
@@ -24,8 +27,8 @@ public:
 	CMsgWindow();
 	virtual ~CMsgWindow();
 
-	// 创建窗口
-	BOOL Create(HWND hWndParent,LPCTSTR lpWindowName,int nWidth=250,int nHeight=180);
+	// 创建窗口(父窗口句柄，窗口标题，长宽，2s后自动关闭，点击内容自动关闭)
+	BOOL Create(HWND hWndParent,LPCTSTR lpWindowName,int nWidth=250,int nHeight=180, bool isAutoClose=true, bool clickAutoClose=false);
 
 	// 显示窗口
 	void Show();
@@ -75,9 +78,15 @@ private:
 	COLORREF m_CaptionColor;
 	int m_nHoverIndex;
 	int m_nDownIndex;
-	BOOL m_bAutoClose;
+	BOOL m_bClickAutoClose;
 	BOOL m_bTracking;
 	CString m_strURL;
+
+	//创建自动消失
+	bool m_isAutoClose;
+	bool m_isFadingOut;
+	int m_Height;
+	int m_Width;
 
 protected:
 	DECLARE_MESSAGE_MAP()
@@ -90,6 +99,7 @@ protected:
 	afx_msg LRESULT OnControlClick(WPARAM wParam, LPARAM lParam);
 	afx_msg void OnDestroy();
 	afx_msg BOOL OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message);
+	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	virtual void PostNcDestroy();
 
 private:
@@ -104,6 +114,9 @@ private:
 	int ControlFromPoint(LPARAM lParam);
 	int ControlFromPoint(POINT pt);
 	void SetCursor(HCURSOR hCursor);
+public:
+	afx_msg void OnMouseHover(UINT nFlags, CPoint point);
+	afx_msg void OnNcLButtonDown(UINT nHitTest, CPoint point);
 };
 
 

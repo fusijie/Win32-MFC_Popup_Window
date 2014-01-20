@@ -31,7 +31,8 @@ CMsgWindow::CMsgWindow()
 	lf.lfWeight=FW_BOLD;
 	m_hBoldFont=CreateFontIndirect(&lf);
 
-	m_bAutoClose=FALSE;
+	m_bClickAutoClose=FALSE;
+	m_isFadingOut=FALSE;
 	m_bTracking=FALSE;
 	m_strURL=_T("");
 }
@@ -56,9 +57,13 @@ BEGIN_MESSAGE_MAP(CMsgWindow, CWnd)
 	ON_WM_MOUSEMOVE()
 	ON_WM_DESTROY()
 	ON_WM_SETCURSOR()
+	ON_WM_TIMER()
+	ON_WM_TIMER()
+	ON_WM_MOUSEHOVER()
+	ON_WM_NCLBUTTONDOWN()
 END_MESSAGE_MAP()
 
-BOOL CMsgWindow::Create( HWND hWndParent,LPCTSTR lpWindowName,int nWidth,int nHeight )
+BOOL CMsgWindow::Create( HWND hWndParent,LPCTSTR lpWindowName,int nWidth,int nHeight,bool isAutoClose, bool clickAutoClose)
 {
 	if(IsWindow())return FALSE;
 	if(!m_hAppSmallIcon){
@@ -93,6 +98,14 @@ BOOL CMsgWindow::Create( HWND hWndParent,LPCTSTR lpWindowName,int nWidth,int nHe
 	SetWindowRgn(hRgn,FALSE);
 	DeleteObject(hRgn);
 
+	m_Height=nHeight;
+	m_Width=nWidth;
+	m_bClickAutoClose=clickAutoClose;
+	m_isAutoClose=isAutoClose;
+	if (m_isAutoClose)
+	{
+		SetTimer(TIMER_WINDOW_DELAY,DELAY_TIME,NULL);
+	}
 	return TRUE;
 }
 
@@ -254,7 +267,7 @@ void CMsgWindow::DrawStatic(HDC hDC,LPNEWSCONTROL pControl)
 		break;
 	case NCT_CONTENT:
 		hFont=m_hFont;
-		uFormat=DT_WORDBREAK|DT_NOPREFIX|DT_WORD_ELLIPSIS;
+		uFormat=DT_WORDBREAK|DT_EDITCONTROL|DT_NOPREFIX/*|DT_WORD_ELLIPSIS*/;
 		break;
 	}
 	//-----------------------
@@ -397,7 +410,7 @@ void CMsgWindow::OnPaint()
 
 void CMsgWindow::SetAutoClose(BOOL bAutoClose)
 {
-	m_bAutoClose=bAutoClose;
+	m_bClickAutoClose=bAutoClose;
 }
 
 void CMsgWindow::OnLButtonUp(UINT nFlags, CPoint point)
@@ -425,7 +438,7 @@ LRESULT CMsgWindow::OnControlClick( WPARAM wParam, LPARAM lParam )
 		if(m_strURL!=_T("")){
 			::ShellExecute(NULL,_T("Open"),m_strURL,NULL,NULL,SW_SHOW);
 		}
-		if(m_bAutoClose){
+		if(m_bClickAutoClose){
 			PostMessage(WM_CLOSE,NULL,NULL);
 		}
 	}
@@ -459,6 +472,15 @@ void CMsgWindow::OnLButtonDown(UINT nFlags, CPoint point)
 }
 
 
+void CMsgWindow::OnMouseHover(UINT nFlags, CPoint point)
+{
+	if (m_isAutoClose && !m_isFadingOut)
+	{
+		KillTimer(TIMER_WINDOW_DELAY);
+	}
+	CWnd::OnMouseHover(nFlags, point);
+}
+
 void CMsgWindow::OnMouseLeave()
 {
 	if(m_nHoverIndex!=-1 || m_nDownIndex!=-1){
@@ -466,6 +488,11 @@ void CMsgWindow::OnMouseLeave()
 		DrawWindowEx();
 	}
 	m_bTracking=FALSE;
+
+	if (m_isAutoClose && !m_isFadingOut)
+	{
+		SetTimer(TIMER_WINDOW_DELAY,DELAY_TIME,NULL);
+	}
 	CWnd::OnMouseLeave();
 }
 
@@ -536,4 +563,42 @@ void CMsgWindow::PostNcDestroy()
 {
 	delete this;
 	CWnd::PostNcDestroy();
+}
+
+void CMsgWindow::OnTimer(UINT_PTR nIDEvent)
+{	
+	RECT rect;
+	SystemParametersInfo(SPI_GETWORKAREA,0,&rect,0);
+	int y=rect.bottom;
+	int x=rect.right-m_Width;
+	switch(nIDEvent)
+	{
+	case TIMER_WINDOW_DELAY:
+		KillTimer(TIMER_WINDOW_DELAY);
+		SetTimer(TIMER_WINDOW_FADEOUT,20,NULL);
+		m_isFadingOut=true;
+		break;
+	case TIMER_WINDOW_FADEOUT:
+		if(m_Height>=0)
+		{
+			m_Height-=4;
+			MoveWindow(x,y-m_Height,m_Width,m_Height);
+		}
+		else
+		{
+			KillTimer(TIMER_WINDOW_FADEOUT);
+			PostMessage(WM_CLOSE,NULL,NULL);
+		}
+		break;
+	default:
+		break;
+	}
+	CWnd::OnTimer(nIDEvent);
+}
+
+//∆¡±Œ±ÍÃ‚¿∏Õœ∂Ø
+void CMsgWindow::OnNcLButtonDown(UINT nHitTest, CPoint point)
+{
+	if (nHitTest==HTCAPTION) return;
+	CWnd::OnNcLButtonDown(nHitTest, point);
 }
